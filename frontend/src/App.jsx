@@ -31,7 +31,7 @@ function App() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/bfhl', {
+      const response = await fetch('https://hierarchy-processor-three.vercel.app/bfhl', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
