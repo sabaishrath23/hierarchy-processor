@@ -11,6 +11,10 @@ app.use(express.json());
 // Main endpoint
 app.post('/bfhl', hierarchyController.processHierarchy);
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+}
+
+module.exports = app;
