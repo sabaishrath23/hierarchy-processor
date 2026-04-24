@@ -93,12 +93,12 @@ exports.processHierarchy = (req, res) => {
             if (visited.has(root)) continue;
             const result = buildTree(root, new Set(), 1);
             if (result.hasCycle) {
-                hierarchies.push({ tree: {}, has_cycle: true });
+                hierarchies.push({ root: root, tree: {}, has_cycle: true });
                 total_cycles++;
             } else {
                 const treeObj = {};
                 treeObj[root] = result.tree;
-                hierarchies.push(treeObj);
+                hierarchies.push({ root: root, tree: treeObj, depth: result.maxDepth });
                 total_trees++;
                 
                 // Depth calculation & tie breaker
@@ -120,13 +120,13 @@ exports.processHierarchy = (req, res) => {
             const root = unvisited[0]; 
             const result = buildTree(root, new Set(), 1);
             if (result.hasCycle) {
-                hierarchies.push({ tree: {}, has_cycle: true });
+                hierarchies.push({ root: root, tree: {}, has_cycle: true });
                 total_cycles++;
             } else {
                 // Failsafe (should theoretically not trigger if isolated properly)
                 const treeObj = {};
                 treeObj[root] = result.tree;
-                hierarchies.push(treeObj);
+                hierarchies.push({ root: root, tree: treeObj, depth: result.maxDepth });
                 total_trees++;
             }
         }
@@ -142,7 +142,7 @@ exports.processHierarchy = (req, res) => {
             email_id: "sabaishrath06@gmail.com",
             college_roll_number: "RA2311003020113",
             hierarchies,
-            invalid_entries,
+            "invalid entries": invalid_entries,
             duplicate_edges,
             summary
         };

@@ -119,7 +119,7 @@ function App() {
                           Cycle Detected (Tree disabled)
                         </div>
                       ) : (
-                        <TreeView data={hierarchy} />
+                        <TreeView data={hierarchy.tree} />
                       )}
                     </div>
                   ))}
@@ -127,12 +127,12 @@ function App() {
               )}
             </div>
 
-            {(results.invalid_entries.length > 0 || results.duplicate_edges.length > 0) && (
+            {(results["invalid entries"].length > 0 || results.duplicate_edges.length > 0) && (
               <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px'}}>
-                {results.invalid_entries.length > 0 && (
+                {results["invalid entries"].length > 0 && (
                   <ResultsCard 
                     title="Invalid Entries" 
-                    items={results.invalid_entries} 
+                    items={results["invalid entries"]} 
                     type="invalid" 
                   />
                 )}
